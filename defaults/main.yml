@@ -1,0 +1,3 @@
+---
+supervisord_config_location: "/etc/supervisor/conf.d"
+supervisord_programs: []
