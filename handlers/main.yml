@@ -6,3 +6,6 @@
 
 - name: update supervisord
   command: /usr/bin/supervisorctl update
+
+- name: restart supervisord
+  command: /etc/init.d/supervisor restart

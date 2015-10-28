@@ -16,6 +16,11 @@
     - 'supervisor'
   when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
 
+- name: Setup main supervisor config
+  template: src=main-supervisor.conf.j2 dest=/etc/supervisor/supervisord.conf
+  notify:
+    - restart supervisord
+
 - name: Setup supervisor config
   template: src=supervisor.conf.j2 dest={{ supervisord_config_location }}/{{ item.value['program_name'] }}.conf
   with_dict: supervisord_programs
