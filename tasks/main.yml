@@ -12,6 +12,7 @@
     cache_valid_time: 3600
     update_cache: yes
     state: latest
+    default_release: wheezy-backports
   with_items:
     - 'supervisor'
   when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
