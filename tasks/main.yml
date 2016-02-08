@@ -6,7 +6,9 @@
 # for each supervisord_programs configured.
 #################################################################
 
-- name: Supervisord | Ubuntu / Debian | Install
+
+# Setup supervisor from backports if debian version < jessie
+- name: Supervisord | Debian < 8 | Install
   apt:
     name: '{{ item }}'
     cache_valid_time: 3600
@@ -15,7 +17,17 @@
     default_release: wheezy-backports
   with_items:
     - 'supervisor'
-  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
+  when: ansible_distribution == 'Debian' and ansible_lsb.major_release|int < 8
+
+- name: Supervisord | Ubuntu / Debian >= 8 | Install
+  apt:
+    name: '{{ item }}'
+    cache_valid_time: 3600
+    update_cache: yes
+    state: latest
+  with_items:
+    - 'supervisor'
+  when: ansible_distribution == 'Ubuntu' or (ansible_distribution == 'Debian' and ansible_lsb.major_release|int >= 8)
 
 - name: Setup main supervisor config
   template: src=main-supervisor.conf.j2 dest=/etc/supervisor/supervisord.conf
