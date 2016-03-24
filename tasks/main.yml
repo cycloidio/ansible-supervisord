@@ -16,7 +16,10 @@
     state: latest
     default_release: wheezy-backports
   with_items:
-    - 'supervisor'
+    - supervisor
+    - python-dev
+    - build-essential
+    - python-pip
   when: ansible_distribution == 'Debian' and ansible_lsb.major_release|int < 8
 
 - name: Supervisord | Ubuntu / Debian >= 8 | Install
@@ -26,8 +29,18 @@
     update_cache: yes
     state: latest
   with_items:
-    - 'supervisor'
+    - supervisor
+    - python-dev
+    - build-essential
+    - python-pip
   when: ansible_distribution == 'Ubuntu' or (ansible_distribution == 'Debian' and ansible_lsb.major_release|int >= 8)
+
+- name: Install superlance
+  pip:
+    name: superlance
+    state: latest
+  notify:
+    - restart supervisord
 
 - name: Setup main supervisor config
   template: src=main-supervisor.conf.j2 dest=/etc/supervisor/supervisord.conf
