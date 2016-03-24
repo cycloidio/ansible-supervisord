@@ -39,8 +39,6 @@
   pip:
     name: superlance
     state: latest
-  notify:
-    - restart supervisord
 
 - name: Setup main supervisor config
   template: src=main-supervisor.conf.j2 dest=/etc/supervisor/supervisord.conf
