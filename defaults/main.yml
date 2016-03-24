@@ -1,4 +1,5 @@
 ---
 supervisord_config_location: "/etc/supervisor/conf.d"
 supervisord_programs: {}
+supervisord_events: {}
 supervisord_listening_port: 9001

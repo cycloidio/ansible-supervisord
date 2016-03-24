@@ -1,0 +1,7 @@
+[eventlistener:{{ item.value['event_name'] }}]
+
+{% for key, value in item.value.items() %}
+{% if key != 'event_name' %}
+{{ key }}={{ value }}
+{% endif %}
+{% endfor %}
