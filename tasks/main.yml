@@ -38,7 +38,7 @@
 - name: Install superlance
   pip:
     name: superlance
-    state: latest
+    state: present
 
 - name: Setup main supervisor config
   template: src=main-supervisor.conf.j2 dest=/etc/supervisor/supervisord.conf
