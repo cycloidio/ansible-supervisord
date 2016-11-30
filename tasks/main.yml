@@ -48,14 +48,14 @@
 
 - name: Setup supervisor programs
   template: src=supervisor.conf.j2 dest={{ supervisord_config_location }}/{{ item.value['program_name'] }}.conf
-  with_dict: supervisord_programs
+  with_dict: "{{ supervisord_programs }}"
   notify:
     - reread supervisord
     - update supervisord
 
 - name: Setup supervisor events
   template: src=supervisor-events.conf.j2 dest={{ supervisord_config_location }}/{{ item.value['event_name'] }}.conf
-  with_dict: supervisord_events
+  with_dict: "{{ supervisord_events }}"
   notify:
     - reread supervisord
     - update supervisord
