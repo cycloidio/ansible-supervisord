@@ -8,4 +8,4 @@
   command: supervisorctl update
 
 - name: restart supervisord
-  command: /etc/init.d/supervisor restart
+  shell: /etc/init.d/supervisor stop && sleep 10 && /etc/init.d/supervisor start
